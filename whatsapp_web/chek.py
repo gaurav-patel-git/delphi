@@ -1,0 +1,20 @@
+import shutil
+import requests
+import base64
+
+string = 'iVBORw0KGgoAAAANSUhEUgAAAIsAAABOCAIAAACfXnKvAAAACXBIWXMAAAsSAAALEgHS3X78AAADb0lEQVR4nO2c0ZHjIAyGeXAJ29YVshVdIdvW9ZDNnGYYBmwsJIF+EX9Pu4lDhD8EGOwcr9cr7cK/v3/Kf7++f7wiMeTwDsCASkz7emhVgQ1diekcGVFVPEN8MZ3PBlIVxpBGTKc0fFXohmzFdMqHVQVqaLaYzjeiqcIytF5MJwYQVRCGEMS0UFTunjwNYYqpcE8pB0MhxLR4qVpqKKibisWqVhjaQ0zLGlUTDe0qpmWqKntDnyOmZYYqM0OfLKbFUJXWEJqY9xmBCkl/USU05HgWlA5cFGpSaswQVPO8Ai2NSgSqWIbQKix24L6Ek+Gr6hlCE6OEzgVapW5VnRjyrcNtfrzffR9zehhOigi4UnW0R/hCAjjBDPV1THkIY1il6kgwbkpGz1QlQJZMCHpKKJgDKiYi92PprvVYdWuYQ1T6H9gBGxyxoF0Djl5lSEf1EogqSiP6u5SkP5tliyxLQ6j4ae3quRyaKmJGM8dJnX4kl9dD7qrKNDKnKhmqOVbcrym4q5rN+noNDa4D63LmqpgXpybfpQnDarYiq4tkbdtKVSngtKhlQ0V/hUJZTWUtVPtD+jpkSVDTKpNgrJqXzR6rRlXblbnMsiiN9DMI8+CN71OQqVoz3tyi1DOpCqo91k5Mo6pAJGVs12Q1e+FCQ9QncC71+apwJDFX1ofKEVdN3suV8x8rVQiS9Gu1thtX2rlcFY1tVrkg2xvs1MVztp2ur+Y4CQ6uiuif39vITz8+VN+l923fqgJBkzEC+n27z7MPaEo4WFm56nIG7iRZQCBV7j2w81OSsKrcxWQgnmNNRpcOtmGs/2rWHisCixMLJ11OQTSUmaoKXEwG2lDGUJW7mKsrSKy5nBixKncxYoIZynBmFnGtlEQ1VFIl1h5iMjsYyoRwMxrkVoa25DGEzmMInccQOo+h1YzewfoYQucxBMHcPVb9Vvwe8BeiZj37MEQb7n7ONMu4/AcL1/VyUPfOizHcB2EW5TMOhbgPq8Rx29d5poCvyv0GCpS5HNqytLuYDIohAiGlcNwQWIYyLimF5oYANUQs84TphoA2REz94RhkN0QAQ2lOMuG7IWIYInx/18CLSIaSRTLF0pPCGSJkyRTODRHSUBpMpqBuiKiGCE4yhdaTohtKXUnR3RDhDSXp09tR2MFQuv5tzA34BTs+I0QUG5xtAAAAAElFTkSuQmCC'
+
+def create_img(string):
+    with open('images/img.png', 'wb') as f:
+        img = base64.b64decode(string)
+        f.write(img)
+
+
+
+url = 'http://example.com/img.png'
+
+def get_img(url):
+    response = requests.get(url, stream=True)
+    with open('images/img.png', 'wb') as out_file:
+        shutil.copyfileobj(response.raw, out_file)
+    del response
